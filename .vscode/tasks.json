@@ -1,0 +1,31 @@
+{
+      "version": "2.0.0",
+      "tasks": [
+            {
+                  "label": "Ejecutar Script ADB",
+                  "type": "shell",
+                  "command": "bash",
+                  "args": [
+                        "/Users/roma/dev/scripts/adb_connect.sh" // Reemplaza "tu_script.sh" con el nombre de tu script
+                  ],
+                  "group": {
+                        "kind": "build",
+                        "isDefault": true
+                  },
+                  "problemMatcher": []
+            },
+            {
+                  "label": "Generar Release",
+                  "type": "shell",
+                  "command": "bash",
+                  "args": [
+                        "/Users/roma/dev/scripts/release.sh" // Reemplaza "release.sh" con el nombre de tu script
+                  ],
+                  "group": {
+                        "kind": "build",
+                        "isDefault": true
+                  },
+                  "problemMatcher": []
+            }
+      ]
+}

@@ -1,5 +1,15 @@
-import 'package:gestion_tesis/src/domain/entities/tesis.dart';
+import 'package:gestion_tesis/src/data/datasources/db/database.dart';
 
-abstract class TesisRepository{
-  Future<List<Tesis>> getTesis({ int page = 1});
+abstract class TesisRepository {
+  Future<List<TesisTableEntity>> getAllTesis();
+
+  Future<TesisTableEntity> getTesisById(int id);
+
+  Future<TesisTableEntity> getTesisByAuthor(String author);
+
+  Future<TesisTableEntity> getTesisByTitle(String title);
+
+  Future<List<TesisTableEntity>> getTesisByArea(String namearea);
+
+  Future<List<TesisTableEntity>> getTesisByYear(int year);
 }
