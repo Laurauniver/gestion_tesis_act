@@ -7,4 +7,4 @@ export 'tests/prueba_detail_page.dart';
 export 'tests/pruebas_page.dart';
 export 'tribunal/tribunal_detail_page.dart';
 export 'tribunal/tribunal_page.dart';
-export 'register_page.dart';
+

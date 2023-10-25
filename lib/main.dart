@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         'tesis_detail': (context) => const TesisDetailPage(),
         'tribunal': (context) => const TribunalPage(),
         'reporte': (context) => const ReportesPage(),
-        'noconformidad': (context) => const NoConformidades(),
+        'noconformidad': (context) => const NoConformidadPage(),
         'prueba': (context) => const PruebasPage(),
-        'register': (context) => const RegisterPage(),
+        
       },
     );
   }

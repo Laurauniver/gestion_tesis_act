@@ -13,7 +13,6 @@ class ReportDataSources {
   $TutorEntityTable get tutorEntity => _appDatabase.tutorEntity;
   $TesisEntityTable get tesisEntity => _appDatabase.tesisEntity;
 
-  @override
   Future<List<TutorTesisEntity>> getAllTutorWithTesis() async {
     List<TutorTesisEntity> tutorsWithTesis = [];
     List<TesisModel> tesisList = [];

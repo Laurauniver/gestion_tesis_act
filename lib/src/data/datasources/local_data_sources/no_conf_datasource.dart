@@ -18,6 +18,7 @@ NoConformidadRepositoryImpl(this._appDatabase);
     
   }
 
+  @override
   Future<List<NoConformidadTableEntity>> getAllNoConformidad() {
     return noConformidadEntity.select().get();
   }

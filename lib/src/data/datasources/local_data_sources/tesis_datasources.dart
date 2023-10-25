@@ -55,7 +55,7 @@ class TesisRepositoryImpl extends TesisDataSource {
   Future<TesisTableEntity> getTesisByTitle(String title) async{
     return await (_appDatabase.select(tesisEntity)
          ..where((tbl) => tbl.titulo.equals(title))).getSingle();
-    
+
   }
 
   @override
