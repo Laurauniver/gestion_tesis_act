@@ -1,6 +1,6 @@
 import 'package:gestion_tesis/src/data/datasources/db/database.dart';
 
-abstract class PruebaRepository {
+abstract class TestsRepository {
   Future<List<PruebaTableEntity>> getAllPrueba();
 
   Future<PruebaTableEntity> getPruebaById(int id);

@@ -44,8 +44,14 @@ class $TesisEntityTable extends TesisEntity
   late final GeneratedColumn<String> area = GeneratedColumn<String>(
       'area', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _textoMeta = const VerificationMeta('texto');
   @override
-  List<GeneratedColumn> get $columns => [id, tutorId, autor, titulo, ano, area];
+  late final GeneratedColumn<String> texto = GeneratedColumn<String>(
+      'texto', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, tutorId, autor, titulo, ano, area, texto];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -89,6 +95,12 @@ class $TesisEntityTable extends TesisEntity
     } else if (isInserting) {
       context.missing(_areaMeta);
     }
+    if (data.containsKey('texto')) {
+      context.handle(
+          _textoMeta, texto.isAcceptableOrUnknown(data['texto']!, _textoMeta));
+    } else if (isInserting) {
+      context.missing(_textoMeta);
+    }
     return context;
   }
 
@@ -110,6 +122,8 @@ class $TesisEntityTable extends TesisEntity
           .read(DriftSqlType.int, data['${effectivePrefix}ano'])!,
       area: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}area'])!,
+      texto: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}texto'])!,
     );
   }
 
@@ -127,13 +141,15 @@ class TesisTableEntity extends DataClass
   final String titulo;
   final int ano;
   final String area;
+  final String texto;
   const TesisTableEntity(
       {required this.id,
       required this.tutorId,
       required this.autor,
       required this.titulo,
       required this.ano,
-      required this.area});
+      required this.area,
+      required this.texto});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -143,6 +159,7 @@ class TesisTableEntity extends DataClass
     map['titulo'] = Variable<String>(titulo);
     map['ano'] = Variable<int>(ano);
     map['area'] = Variable<String>(area);
+    map['texto'] = Variable<String>(texto);
     return map;
   }
 
@@ -154,6 +171,7 @@ class TesisTableEntity extends DataClass
       titulo: Value(titulo),
       ano: Value(ano),
       area: Value(area),
+      texto: Value(texto),
     );
   }
 
@@ -167,6 +185,7 @@ class TesisTableEntity extends DataClass
       titulo: serializer.fromJson<String>(json['titulo']),
       ano: serializer.fromJson<int>(json['ano']),
       area: serializer.fromJson<String>(json['area']),
+      texto: serializer.fromJson<String>(json['texto']),
     );
   }
   @override
@@ -179,6 +198,7 @@ class TesisTableEntity extends DataClass
       'titulo': serializer.toJson<String>(titulo),
       'ano': serializer.toJson<int>(ano),
       'area': serializer.toJson<String>(area),
+      'texto': serializer.toJson<String>(texto),
     };
   }
 
@@ -188,7 +208,8 @@ class TesisTableEntity extends DataClass
           String? autor,
           String? titulo,
           int? ano,
-          String? area}) =>
+          String? area,
+          String? texto}) =>
       TesisTableEntity(
         id: id ?? this.id,
         tutorId: tutorId ?? this.tutorId,
@@ -196,6 +217,7 @@ class TesisTableEntity extends DataClass
         titulo: titulo ?? this.titulo,
         ano: ano ?? this.ano,
         area: area ?? this.area,
+        texto: texto ?? this.texto,
       );
   @override
   String toString() {
@@ -205,13 +227,14 @@ class TesisTableEntity extends DataClass
           ..write('autor: $autor, ')
           ..write('titulo: $titulo, ')
           ..write('ano: $ano, ')
-          ..write('area: $area')
+          ..write('area: $area, ')
+          ..write('texto: $texto')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, tutorId, autor, titulo, ano, area);
+  int get hashCode => Object.hash(id, tutorId, autor, titulo, ano, area, texto);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -221,7 +244,8 @@ class TesisTableEntity extends DataClass
           other.autor == this.autor &&
           other.titulo == this.titulo &&
           other.ano == this.ano &&
-          other.area == this.area);
+          other.area == this.area &&
+          other.texto == this.texto);
 }
 
 class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
@@ -231,6 +255,7 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
   final Value<String> titulo;
   final Value<int> ano;
   final Value<String> area;
+  final Value<String> texto;
   const TesisEntityCompanion({
     this.id = const Value.absent(),
     this.tutorId = const Value.absent(),
@@ -238,6 +263,7 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
     this.titulo = const Value.absent(),
     this.ano = const Value.absent(),
     this.area = const Value.absent(),
+    this.texto = const Value.absent(),
   });
   TesisEntityCompanion.insert({
     this.id = const Value.absent(),
@@ -246,11 +272,13 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
     required String titulo,
     required int ano,
     required String area,
+    required String texto,
   })  : tutorId = Value(tutorId),
         autor = Value(autor),
         titulo = Value(titulo),
         ano = Value(ano),
-        area = Value(area);
+        area = Value(area),
+        texto = Value(texto);
   static Insertable<TesisTableEntity> custom({
     Expression<int>? id,
     Expression<int>? tutorId,
@@ -258,6 +286,7 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
     Expression<String>? titulo,
     Expression<int>? ano,
     Expression<String>? area,
+    Expression<String>? texto,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -266,6 +295,7 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
       if (titulo != null) 'titulo': titulo,
       if (ano != null) 'ano': ano,
       if (area != null) 'area': area,
+      if (texto != null) 'texto': texto,
     });
   }
 
@@ -275,7 +305,8 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
       Value<String>? autor,
       Value<String>? titulo,
       Value<int>? ano,
-      Value<String>? area}) {
+      Value<String>? area,
+      Value<String>? texto}) {
     return TesisEntityCompanion(
       id: id ?? this.id,
       tutorId: tutorId ?? this.tutorId,
@@ -283,6 +314,7 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
       titulo: titulo ?? this.titulo,
       ano: ano ?? this.ano,
       area: area ?? this.area,
+      texto: texto ?? this.texto,
     );
   }
 
@@ -307,6 +339,9 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
     if (area.present) {
       map['area'] = Variable<String>(area.value);
     }
+    if (texto.present) {
+      map['texto'] = Variable<String>(texto.value);
+    }
     return map;
   }
 
@@ -318,7 +353,8 @@ class TesisEntityCompanion extends UpdateCompanion<TesisTableEntity> {
           ..write('autor: $autor, ')
           ..write('titulo: $titulo, ')
           ..write('ano: $ano, ')
-          ..write('area: $area')
+          ..write('area: $area, ')
+          ..write('texto: $texto')
           ..write(')'))
         .toString();
   }
@@ -861,8 +897,13 @@ class $PruebaEntityTable extends PruebaEntity
   late final GeneratedColumn<String> descripcion = GeneratedColumn<String>(
       'descripcion', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _textoMeta = const VerificationMeta('texto');
   @override
-  List<GeneratedColumn> get $columns => [id, tipo, descripcion];
+  late final GeneratedColumn<String> texto = GeneratedColumn<String>(
+      'texto', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, tipo, descripcion, texto];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -890,6 +931,12 @@ class $PruebaEntityTable extends PruebaEntity
     } else if (isInserting) {
       context.missing(_descripcionMeta);
     }
+    if (data.containsKey('texto')) {
+      context.handle(
+          _textoMeta, texto.isAcceptableOrUnknown(data['texto']!, _textoMeta));
+    } else if (isInserting) {
+      context.missing(_textoMeta);
+    }
     return context;
   }
 
@@ -905,6 +952,8 @@ class $PruebaEntityTable extends PruebaEntity
           .read(DriftSqlType.string, data['${effectivePrefix}tipo'])!,
       descripcion: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}descripcion'])!,
+      texto: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}texto'])!,
     );
   }
 
@@ -919,14 +968,19 @@ class PruebaTableEntity extends DataClass
   final int id;
   final String tipo;
   final String descripcion;
+  final String texto;
   const PruebaTableEntity(
-      {required this.id, required this.tipo, required this.descripcion});
+      {required this.id,
+      required this.tipo,
+      required this.descripcion,
+      required this.texto});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['tipo'] = Variable<String>(tipo);
     map['descripcion'] = Variable<String>(descripcion);
+    map['texto'] = Variable<String>(texto);
     return map;
   }
 
@@ -935,6 +989,7 @@ class PruebaTableEntity extends DataClass
       id: Value(id),
       tipo: Value(tipo),
       descripcion: Value(descripcion),
+      texto: Value(texto),
     );
   }
 
@@ -945,6 +1000,7 @@ class PruebaTableEntity extends DataClass
       id: serializer.fromJson<int>(json['id']),
       tipo: serializer.fromJson<String>(json['tipo']),
       descripcion: serializer.fromJson<String>(json['descripcion']),
+      texto: serializer.fromJson<String>(json['texto']),
     );
   }
   @override
@@ -954,69 +1010,84 @@ class PruebaTableEntity extends DataClass
       'id': serializer.toJson<int>(id),
       'tipo': serializer.toJson<String>(tipo),
       'descripcion': serializer.toJson<String>(descripcion),
+      'texto': serializer.toJson<String>(texto),
     };
   }
 
-  PruebaTableEntity copyWith({int? id, String? tipo, String? descripcion}) =>
+  PruebaTableEntity copyWith(
+          {int? id, String? tipo, String? descripcion, String? texto}) =>
       PruebaTableEntity(
         id: id ?? this.id,
         tipo: tipo ?? this.tipo,
         descripcion: descripcion ?? this.descripcion,
+        texto: texto ?? this.texto,
       );
   @override
   String toString() {
     return (StringBuffer('PruebaTableEntity(')
           ..write('id: $id, ')
           ..write('tipo: $tipo, ')
-          ..write('descripcion: $descripcion')
+          ..write('descripcion: $descripcion, ')
+          ..write('texto: $texto')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, tipo, descripcion);
+  int get hashCode => Object.hash(id, tipo, descripcion, texto);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is PruebaTableEntity &&
           other.id == this.id &&
           other.tipo == this.tipo &&
-          other.descripcion == this.descripcion);
+          other.descripcion == this.descripcion &&
+          other.texto == this.texto);
 }
 
 class PruebaEntityCompanion extends UpdateCompanion<PruebaTableEntity> {
   final Value<int> id;
   final Value<String> tipo;
   final Value<String> descripcion;
+  final Value<String> texto;
   const PruebaEntityCompanion({
     this.id = const Value.absent(),
     this.tipo = const Value.absent(),
     this.descripcion = const Value.absent(),
+    this.texto = const Value.absent(),
   });
   PruebaEntityCompanion.insert({
     this.id = const Value.absent(),
     required String tipo,
     required String descripcion,
+    required String texto,
   })  : tipo = Value(tipo),
-        descripcion = Value(descripcion);
+        descripcion = Value(descripcion),
+        texto = Value(texto);
   static Insertable<PruebaTableEntity> custom({
     Expression<int>? id,
     Expression<String>? tipo,
     Expression<String>? descripcion,
+    Expression<String>? texto,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (tipo != null) 'tipo': tipo,
       if (descripcion != null) 'descripcion': descripcion,
+      if (texto != null) 'texto': texto,
     });
   }
 
   PruebaEntityCompanion copyWith(
-      {Value<int>? id, Value<String>? tipo, Value<String>? descripcion}) {
+      {Value<int>? id,
+      Value<String>? tipo,
+      Value<String>? descripcion,
+      Value<String>? texto}) {
     return PruebaEntityCompanion(
       id: id ?? this.id,
       tipo: tipo ?? this.tipo,
       descripcion: descripcion ?? this.descripcion,
+      texto: texto ?? this.texto,
     );
   }
 
@@ -1032,6 +1103,9 @@ class PruebaEntityCompanion extends UpdateCompanion<PruebaTableEntity> {
     if (descripcion.present) {
       map['descripcion'] = Variable<String>(descripcion.value);
     }
+    if (texto.present) {
+      map['texto'] = Variable<String>(texto.value);
+    }
     return map;
   }
 
@@ -1040,7 +1114,8 @@ class PruebaEntityCompanion extends UpdateCompanion<PruebaTableEntity> {
     return (StringBuffer('PruebaEntityCompanion(')
           ..write('id: $id, ')
           ..write('tipo: $tipo, ')
-          ..write('descripcion: $descripcion')
+          ..write('descripcion: $descripcion, ')
+          ..write('texto: $texto')
           ..write(')'))
         .toString();
   }
@@ -1429,254 +1504,6 @@ class TutorEntityCompanion extends UpdateCompanion<TutorTableEntity> {
   }
 }
 
-class $UserEntityTable extends UserEntity
-    with TableInfo<$UserEntityTable, UserTableEntity> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $UserEntityTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
-  @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _usernameMeta =
-      const VerificationMeta('username');
-  @override
-  late final GeneratedColumn<String> username = GeneratedColumn<String>(
-      'username', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _passwordMeta =
-      const VerificationMeta('password');
-  @override
-  late final GeneratedColumn<String> password = GeneratedColumn<String>(
-      'password', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _emailMeta = const VerificationMeta('email');
-  @override
-  late final GeneratedColumn<String> email = GeneratedColumn<String>(
-      'email', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [id, username, password, email];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'user_entity';
-  @override
-  VerificationContext validateIntegrity(Insertable<UserTableEntity> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    }
-    if (data.containsKey('username')) {
-      context.handle(_usernameMeta,
-          username.isAcceptableOrUnknown(data['username']!, _usernameMeta));
-    } else if (isInserting) {
-      context.missing(_usernameMeta);
-    }
-    if (data.containsKey('password')) {
-      context.handle(_passwordMeta,
-          password.isAcceptableOrUnknown(data['password']!, _passwordMeta));
-    } else if (isInserting) {
-      context.missing(_passwordMeta);
-    }
-    if (data.containsKey('email')) {
-      context.handle(
-          _emailMeta, email.isAcceptableOrUnknown(data['email']!, _emailMeta));
-    } else if (isInserting) {
-      context.missing(_emailMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {id};
-  @override
-  UserTableEntity map(Map<String, dynamic> data, {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return UserTableEntity(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      username: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}username'])!,
-      password: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}password'])!,
-      email: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}email'])!,
-    );
-  }
-
-  @override
-  $UserEntityTable createAlias(String alias) {
-    return $UserEntityTable(attachedDatabase, alias);
-  }
-}
-
-class UserTableEntity extends DataClass implements Insertable<UserTableEntity> {
-  final int id;
-  final String username;
-  final String password;
-  final String email;
-  const UserTableEntity(
-      {required this.id,
-      required this.username,
-      required this.password,
-      required this.email});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['username'] = Variable<String>(username);
-    map['password'] = Variable<String>(password);
-    map['email'] = Variable<String>(email);
-    return map;
-  }
-
-  UserEntityCompanion toCompanion(bool nullToAbsent) {
-    return UserEntityCompanion(
-      id: Value(id),
-      username: Value(username),
-      password: Value(password),
-      email: Value(email),
-    );
-  }
-
-  factory UserTableEntity.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return UserTableEntity(
-      id: serializer.fromJson<int>(json['id']),
-      username: serializer.fromJson<String>(json['username']),
-      password: serializer.fromJson<String>(json['password']),
-      email: serializer.fromJson<String>(json['email']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'username': serializer.toJson<String>(username),
-      'password': serializer.toJson<String>(password),
-      'email': serializer.toJson<String>(email),
-    };
-  }
-
-  UserTableEntity copyWith(
-          {int? id, String? username, String? password, String? email}) =>
-      UserTableEntity(
-        id: id ?? this.id,
-        username: username ?? this.username,
-        password: password ?? this.password,
-        email: email ?? this.email,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('UserTableEntity(')
-          ..write('id: $id, ')
-          ..write('username: $username, ')
-          ..write('password: $password, ')
-          ..write('email: $email')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, username, password, email);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is UserTableEntity &&
-          other.id == this.id &&
-          other.username == this.username &&
-          other.password == this.password &&
-          other.email == this.email);
-}
-
-class UserEntityCompanion extends UpdateCompanion<UserTableEntity> {
-  final Value<int> id;
-  final Value<String> username;
-  final Value<String> password;
-  final Value<String> email;
-  const UserEntityCompanion({
-    this.id = const Value.absent(),
-    this.username = const Value.absent(),
-    this.password = const Value.absent(),
-    this.email = const Value.absent(),
-  });
-  UserEntityCompanion.insert({
-    this.id = const Value.absent(),
-    required String username,
-    required String password,
-    required String email,
-  })  : username = Value(username),
-        password = Value(password),
-        email = Value(email);
-  static Insertable<UserTableEntity> custom({
-    Expression<int>? id,
-    Expression<String>? username,
-    Expression<String>? password,
-    Expression<String>? email,
-  }) {
-    return RawValuesInsertable({
-      if (id != null) 'id': id,
-      if (username != null) 'username': username,
-      if (password != null) 'password': password,
-      if (email != null) 'email': email,
-    });
-  }
-
-  UserEntityCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? username,
-      Value<String>? password,
-      Value<String>? email}) {
-    return UserEntityCompanion(
-      id: id ?? this.id,
-      username: username ?? this.username,
-      password: password ?? this.password,
-      email: email ?? this.email,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
-    }
-    if (username.present) {
-      map['username'] = Variable<String>(username.value);
-    }
-    if (password.present) {
-      map['password'] = Variable<String>(password.value);
-    }
-    if (email.present) {
-      map['email'] = Variable<String>(email.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('UserEntityCompanion(')
-          ..write('id: $id, ')
-          ..write('username: $username, ')
-          ..write('password: $password, ')
-          ..write('email: $email')
-          ..write(')'))
-        .toString();
-  }
-}
-
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $TesisEntityTable tesisEntity = $TesisEntityTable(this);
@@ -1686,7 +1513,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $PruebaEntityTable pruebaEntity = $PruebaEntityTable(this);
   late final $ReportEntityTable reportEntity = $ReportEntityTable(this);
   late final $TutorEntityTable tutorEntity = $TutorEntityTable(this);
-  late final $UserEntityTable userEntity = $UserEntityTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1697,7 +1523,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         noConformidadEntity,
         pruebaEntity,
         reportEntity,
-        tutorEntity,
-        userEntity
+        tutorEntity
       ];
 }

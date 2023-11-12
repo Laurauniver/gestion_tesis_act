@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestion_tesis/src/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:gestion_tesis/src/presentation/pages/pages.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
@@ -19,12 +21,17 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         title: const Text('GraduApp'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, 'search');
+            },
             icon: const Icon(Icons.search),
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.people),
+            onPressed: () {
+              context.read<AuthBloc>().add(OnLogOutEvent());
+              Navigator.restorablePushNamed(context, '/');
+            },
+            icon: const Icon(Icons.exit_to_app),
           ),
         ],
       ),

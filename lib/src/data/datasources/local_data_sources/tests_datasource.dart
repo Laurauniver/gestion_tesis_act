@@ -1,19 +1,12 @@
 import 'package:drift/drift.dart';
 import 'package:gestion_tesis/src/data/datasources/db/database.dart';
 
-abstract class PruebaDataSource {
-  Future<List<PruebaTableEntity>> getAllPrueba();
-
-  Future<PruebaTableEntity> getPruebaById(int id);
-
-  Future<List<PruebaTableEntity>> getPruebaByTipo(String tipo);
-
-}
-
-class PruebaRepositoryImpl extends PruebaDataSource {
-  PruebaRepositoryImpl(this._appDatabase);
+class TestsDataSource {
+  TestsDataSource(this._appDatabase);
 
   final AppDatabase _appDatabase;
+
+
   $PruebaEntityTable get pruebaEntity => _appDatabase.pruebaEntity;
 
   Future<void> insertPrueba(List<PruebaTableEntity> listPrueba) async {
@@ -39,8 +32,7 @@ class PruebaRepositoryImpl extends PruebaDataSource {
     return await (_appDatabase.select(pruebaEntity)
           ..where((tbl) => tbl.tipo.equals(tipo))).get();
   }
-  
+
 
 }
 
-  

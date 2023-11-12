@@ -8,7 +8,7 @@ part 'tests_state.dart';
 class TestsCubit extends Cubit<TestsState> {
   TestsCubit(this._pruebaDataSource) : super(TestsInitial());
 
-  final PruebaDataSource _pruebaDataSource;
+  final TestsDataSource _pruebaDataSource;
 
   Future<void> getAllPrueba() async{
     emit(TestsLoading());

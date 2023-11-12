@@ -8,4 +8,6 @@ class PruebaEntity extends Table {
 
   TextColumn get descripcion => text()();
 
+  TextColumn get texto => text()();
+
 }

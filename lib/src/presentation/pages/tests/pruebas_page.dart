@@ -14,13 +14,13 @@ class PruebasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TestsCubit(
-        PruebaRepositoryImpl(
+              TestsDataSource(
           AppDatabase(),),)..getAllPrueba(),
           child:  Scaffold(
             appBar: AppBar(title: const Text('Listado de pruebas')),
             body: const _PruebasPage(),));
 
-          
+
   }
 }
 
@@ -44,7 +44,7 @@ class  _PruebasPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(
-                      state.tests[index].tipo.toString()), 
+                      state.tests[index].tipo.toString()),
                         trailing: IconButton(
                           icon: const Icon(Icons.visibility),
                           onPressed: () {
@@ -52,7 +52,10 @@ class  _PruebasPage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: ((context) =>
-                                        const PruebasDetailPage())));
+                                         PruebasDetailPage(
+                                        text: state.tests[index].texto,
+                                        titulo: state.tests[index].tipo,
+                                      ))));
                           }
                 ));
               },
@@ -79,7 +82,7 @@ class  _PruebasPage extends StatelessWidget {
 
 //   @override
 //   createState() => _TesisPage();
-  
+
 // }
 
 // class _TesisPage extends State<TesisPage> {

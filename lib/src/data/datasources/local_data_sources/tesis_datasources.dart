@@ -1,22 +1,8 @@
 import 'package:drift/drift.dart';
 import 'package:gestion_tesis/src/data/datasources/db/database.dart';
 
-abstract class TesisDataSource {
-  Future<List<TesisTableEntity>> getAllTesis();
-
-  Future<TesisTableEntity> getTesisById(int id);
-
-  Future<TesisTableEntity> getTesisByAuthor(String author);
-
-  Future<TesisTableEntity> getTesisByTitle(String title);
-
-  Future<List<TesisTableEntity>> getTesisByArea(String area);
-
-  Future<List<TesisTableEntity>> getTesisByYear(int year);
-}
-
-class TesisRepositoryImpl extends TesisDataSource {
-  TesisRepositoryImpl(this._appDatabase);
+class TesisDataSource {
+  TesisDataSource(this._appDatabase);
 
   final AppDatabase _appDatabase;
   $TesisEntityTable get tesisEntity => _appDatabase.tesisEntity;
@@ -48,19 +34,21 @@ class TesisRepositoryImpl extends TesisDataSource {
   @override
   Future<List<TesisTableEntity>> getTesisByArea(String area) async {
     return await (_appDatabase.select(tesisEntity)
-          ..where((tbl) => tbl.area.equals(area))).get();
+          ..where((tbl) => tbl.area.equals(area)))
+        .get();
   }
 
   @override
-  Future<TesisTableEntity> getTesisByTitle(String title) async{
+  Future<TesisTableEntity> getTesisByTitle(String title) async {
     return await (_appDatabase.select(tesisEntity)
-         ..where((tbl) => tbl.titulo.equals(title))).getSingle();
-
+          ..where((tbl) => tbl.titulo.equals(title)))
+        .getSingle();
   }
 
   @override
-  Future<List<TesisTableEntity>> getTesisByYear(int year) async{
+  Future<List<TesisTableEntity>> getTesisByYear(int year) async {
     return await (_appDatabase.select(tesisEntity)
-         ..where((tbl) => tbl.ano.equals(year))).get();
+          ..where((tbl) => tbl.ano.equals(year)))
+        .get();
   }
 }

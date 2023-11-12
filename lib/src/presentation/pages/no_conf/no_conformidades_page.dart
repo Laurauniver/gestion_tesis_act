@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_tesis/src/data/datasources/db/database.dart';
 import 'package:gestion_tesis/src/data/datasources/local_data_sources/no_conf_datasource.dart';
 import 'package:gestion_tesis/src/presentation/pages/no_conf/cubit/no_conf_cubit.dart';
-import 'package:gestion_tesis/src/presentation/pages/no_conf/noconf_detail_page.dart';
 
 
 class NoConformidadPage extends StatelessWidget {
@@ -13,13 +12,13 @@ class NoConformidadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NoConformidadCubit(
-        NoConformidadRepositoryImpl(
+              NoConformidadDataSource(
           AppDatabase(),),)..getAllNoConformidad(),
           child:  Scaffold(
             appBar: AppBar(title: const Text('Listado de No Conformidades')),
             body: const _NoConformidadPage(),));
 
-          
+
   }
 }
 
@@ -43,17 +42,8 @@ class  _NoConformidadPage extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(
-                      state.noConformidad[index].toString()), 
-                        trailing: IconButton(
-                          icon: const Icon(Icons.visibility),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) =>
-                                        const NoConformidadDetailPage())));
-                          }
-                ));
+                      state.noConformidad[index].descripcion.toString()),
+                );
               },
             );
           }
@@ -78,7 +68,7 @@ class  _NoConformidadPage extends StatelessWidget {
 
 //   @override
 //   createState() => _TesisPage();
-  
+
 // }
 
 // class _TesisPage extends State<TesisPage> {

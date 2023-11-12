@@ -13,4 +13,7 @@ class TesisEntity extends Table {
   IntColumn get ano => integer()();
 
   TextColumn get area => text()();
+
+  TextColumn get texto => text()();
 }
+

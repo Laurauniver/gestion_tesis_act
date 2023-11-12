@@ -16,12 +16,12 @@ final class TribunalSuccessful extends TribunalState{
 
   TribunalSuccessful({required this.tribunal});
 
-  
+
 }
 
 final class TribunalFailure extends TribunalState{
   final String message;
 
   TribunalFailure({required this.message});
-  
+
 }

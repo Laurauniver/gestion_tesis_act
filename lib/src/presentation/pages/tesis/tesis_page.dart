@@ -12,13 +12,13 @@ class TesisPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TesisCubit(
-        TesisRepositoryImpl(
+              TesisDataSource(
           AppDatabase(),),)..getAllTesis(),
           child:  Scaffold(
             appBar: AppBar(title: const Text('Listado de tesis')),
             body: const _TesisPage(),));
 
-          
+
   }
 }
 
@@ -44,7 +44,7 @@ class  _TesisPage extends StatelessWidget {
                   title: Text(
                       state.tesis[index].titulo.toString()),
                   subtitle: Text(
-                      state.tesis[index].autor.toString()), 
+                      state.tesis[index].autor.toString()),
                         trailing: IconButton(
                           icon: const Icon(Icons.visibility),
                           onPressed: () {
@@ -52,7 +52,10 @@ class  _TesisPage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: ((context) =>
-                                        const TesisDetailPage())));
+                                         TesisDetailPage(
+                                        titulo: state.tesis[index].titulo,
+                                        text: state.tesis[index].texto,
+                                      ))));
                           }
                 ));
               },
@@ -79,7 +82,7 @@ class  _TesisPage extends StatelessWidget {
 
 //   @override
 //   createState() => _TesisPage();
-  
+
 // }
 
 // class _TesisPage extends State<TesisPage> {

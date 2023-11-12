@@ -6,9 +6,9 @@ import 'package:gestion_tesis/src/data/models/tesis.dart';
 import 'package:gestion_tesis/src/domain/entities/tutor_tesis_entity.dart';
 
 class ReportDataSources {
-  final AppDatabase _appDatabase;
-
   ReportDataSources(this._appDatabase);
+
+  final AppDatabase _appDatabase;
 
   $TutorEntityTable get tutorEntity => _appDatabase.tutorEntity;
   $TesisEntityTable get tesisEntity => _appDatabase.tesisEntity;

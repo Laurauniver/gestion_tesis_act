@@ -4,28 +4,48 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.vertical,
-      children: <Widget>[
-        ListTile(
-          title: const Text('Tesis'),
-          onTap: () {
-            Navigator.pushNamed(context, 'tesis');
-          },
-        ),
-        ListTile(
-          title: const Text('Tribunal'),
-          onTap: () => Navigator.pushNamed(context, 'tribunal'),
-        ),
-        ListTile(
-          title: const Text('No conformidades'),
-          onTap: () => Navigator.pushNamed(context, 'noconformidad'),
-        ),
-        ListTile(
-          title: const Text('Pruebas'),
-          onTap: () => Navigator.pushNamed(context, 'prueba'),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          Card(
+            child: ListTile(
+              title: const Text('Ver tesis', style: TextStyle(fontSize: 20)),
+              onTap: () {
+                Navigator.pushNamed(context, 'tesis');
+              },
+              trailing: const Icon(Icons.arrow_right),
+            ),
+          ),
+          const Divider(),
+          Card(
+            child: ListTile(
+              title:
+                  const Text('Ver tribunales', style: TextStyle(fontSize: 20)),
+              onTap: () => Navigator.pushNamed(context, 'tribunal'),
+              trailing: const Icon(Icons.arrow_right),
+            ),
+          ),
+          const Divider(),
+          Card(
+            child: ListTile(
+              title: const Text('Ver no conformidades',
+                  style: TextStyle(fontSize: 20)),
+              onTap: () => Navigator.pushNamed(context, 'noConformidad'),
+              trailing: const Icon(Icons.arrow_right),
+            ),
+          ),
+          const Divider(),
+          Card(
+            child: ListTile(
+              title: const Text('Ver pruebas', style: TextStyle(fontSize: 20)),
+              onTap: () => Navigator.pushNamed(context, 'prueba'),
+              trailing: const Icon(Icons.arrow_right),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
