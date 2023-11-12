@@ -100,6 +100,7 @@ dev_dependencies:
   lint: ^2.0.1
   flutter_launcher_icons: ^0.11.0
   flutter_native_splash: ^2.2.2
+  rename_app: ^1.3.1
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -155,3 +156,7 @@ flutter_native_splash:
 # flutter pub global activate rename
 # flutter pub global run rename --bundleId cu.uci.f_ilexcuba
 # flutter pub global run rename --appname "ilexCuba"
+
+# flutter pub run rename_app:main all="My App Name"
+# flutter pub run rename_app:main android="Anroid Name" ios="IOS Name" others="Others Name"
+# flutter pub run rename_app:main android="Android Name" ios="IOS Name" web="Web Name" mac="Mac Name" windows="Windows Name"
