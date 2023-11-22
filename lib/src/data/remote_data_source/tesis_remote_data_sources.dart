@@ -1,3 +1,48 @@
+import 'dart:convert';
+
+import 'package:diacritic/diacritic.dart';
+import 'package:gestion_tesis/src/data/models/tesis.dart';
+
+class TesisRemoteDataSource {
+  const TesisRemoteDataSource();
+
+  //Obtener todos
+
+  Future<List<TesisModel>> getAllTesis({String? titulo}) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    // Decodifica el JSON
+    Map<String, dynamic> data = json.decode(tesis);
+
+    final tesisList = (data['tesis'] as List<dynamic>)
+        .map((e) => TesisModel.fromMap(e))
+        .toList();
+
+    if (titulo != null && titulo.isNotEmpty) {
+      return tesisList
+          .where((element) => removeDiacritics(element.titulo.toLowerCase())
+              .contains(removeDiacritics(titulo.toLowerCase())))
+          .toList();
+    } else {
+      return tesisList;
+    }
+  }
+
+  Future<TesisModel> getTesisById(int id) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    // Decodifica el JSON
+    Map<String, dynamic> data = json.decode(tesis);
+
+    return (data['tesis'] as List<dynamic>)
+        .map((e) => TesisModel.fromMap(e))
+        .toList()
+        .firstWhere((element) => element.id == id);
+  }
+}
+
+const tesis = '''
+
 {
   "tesis": [
     {
@@ -66,3 +111,4 @@
     }
   ]
 }
+''';

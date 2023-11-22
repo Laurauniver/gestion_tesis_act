@@ -12,10 +12,9 @@ final class TesisInitial extends TesisState {}
 final class TesisLoading extends TesisState {}
 
 final class TesisSuccessful extends TesisState {
-  final List<TesisTableEntity> tesis;
+  final List<TesisModel> tesis;
 
   TesisSuccessful({required this.tesis});
-  
 }
 
 final class TesisFailure extends TesisState {

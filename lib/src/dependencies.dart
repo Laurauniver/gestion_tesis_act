@@ -3,23 +3,23 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:gestion_tesis/src/data/datasources/db/database.dart';
 import 'package:gestion_tesis/src/data/datasources/local_data_sources/no_conf_datasource.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/tesis_datasources.dart';
 import 'package:gestion_tesis/src/data/datasources/local_data_sources/tests_datasource.dart';
 import 'package:gestion_tesis/src/data/datasources/local_data_sources/tribunal_datasources.dart';
 import 'package:gestion_tesis/src/data/datasources/local_data_sources/tutor_datasource.dart';
+import 'package:gestion_tesis/src/data/remote_data_source/no_conf_remote_data_source.dart';
+import 'package:gestion_tesis/src/data/remote_data_source/tesis_remote_data_sources.dart';
+import 'package:gestion_tesis/src/data/repositories/no_conf_repository_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/tesis_repositrory_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/test_repository_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/tribual_repository_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/tutor_repository_impl.dart';
 import 'package:gestion_tesis/src/domain/repositories/auth_repository_imp.dart';
+import 'package:gestion_tesis/src/domain/repositories/no_conf_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tesis_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tests_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tribunal_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tutor_repository.dart';
-import 'package:gestion_tesis/src/presentation/global_search/cubit/global_search_cubit.dart';
 import 'package:gestion_tesis/src/presentation/pages/auth/bloc/auth_bloc.dart';
-import 'package:gestion_tesis/src/presentation/pages/no_conf/cubit/no_conf_cubit.dart';
-import 'package:gestion_tesis/src/presentation/pages/tesis/cubit/tesis_cubit.dart';
 import 'package:gestion_tesis/src/presentation/pages/tests/cubit/tests_cubit.dart';
 import 'package:gestion_tesis/src/presentation/pages/tribunal/cubit/tribunal_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -39,11 +39,8 @@ Future<void> initializeDependencies() async {
   //Database
   injector.registerLazySingleton<AppDatabase>(() => AppDatabase());
 
-  //Repositories
+  //Data sources
   injector
-    ..registerFactory(
-      () => TesisDataSource(injector()),
-    )
     ..registerFactory(
       () => TribunalDataSource(injector()),
     )
@@ -55,6 +52,12 @@ Future<void> initializeDependencies() async {
     )
     ..registerFactory(
       () => NoConformidadDataSource(injector()),
+    )
+    ..registerFactory(
+      () => TesisRemoteDataSource(),
+    )
+    ..registerLazySingleton(
+      () => NoConformidadRemoteDataSource(),
     );
 
   //Repositories
@@ -73,24 +76,18 @@ Future<void> initializeDependencies() async {
     )
     ..registerLazySingleton<TutorRepository>(
       () => TutorRepositoryImpl(injector()),
+    )
+    ..registerLazySingleton<NoConformidadRepository>(
+      () => NoConformidadRepositoryImpl(injector()),
     );
 
   // Blocs
   injector
     ..registerFactory(
-      () => GlobalSearchCubit(injector()),
-    )
-    ..registerFactory(
-      () => TesisCubit(injector()),
-    )
-    ..registerFactory(
       () => TribunalCubit(injector()),
     )
     ..registerFactory(
       () => TestsCubit(injector()),
-    )
-    ..registerFactory(
-      () => NoConformidadCubit(injector()),
     )
     ..registerFactory(
       () => AuthBloc(injector()),

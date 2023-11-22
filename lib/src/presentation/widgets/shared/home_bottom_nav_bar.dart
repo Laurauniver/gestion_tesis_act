@@ -20,13 +20,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Gestión de Trabajos de Diploma'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, 'search');
-            },
-            icon: const Icon(Icons.search),
-          ),
+        actions: [      
           IconButton(
             onPressed: () {
               context.read<AuthBloc>().add(OnLogOutEvent());

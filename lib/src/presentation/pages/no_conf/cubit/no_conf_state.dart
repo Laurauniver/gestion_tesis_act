@@ -12,7 +12,7 @@ final class NoConformidadInitial extends NoConformidadState {}
 final class NoConformidadLoading extends NoConformidadState {}
 
 final class NoConformidadSuccessful extends NoConformidadState {
-  final List<NoConformidadTableEntity> noConformidad;
+  final List<NoConformidad> noConformidad;
 
   NoConformidadSuccessful({required this.noConformidad});
   

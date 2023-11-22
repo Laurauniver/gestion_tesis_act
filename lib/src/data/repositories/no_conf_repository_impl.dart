@@ -1,25 +1,19 @@
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/no_conf_datasource.dart';
+import 'package:gestion_tesis/src/data/models/no_conformidad.dart';
+import 'package:gestion_tesis/src/data/remote_data_source/no_conf_remote_data_source.dart';
 import 'package:gestion_tesis/src/domain/repositories/no_conf_repository.dart';
 
-
 class NoConformidadRepositoryImpl extends NoConformidadRepository {
-  NoConformidadRepositoryImpl(this._noConformidadDatasource);
+  NoConformidadRepositoryImpl(this.dataSource);
 
-  final NoConformidadDataSource _noConformidadDatasource;
-
+  final NoConformidadRemoteDataSource dataSource;
 
   @override
-  Future<NoConformidadTableEntity> getNoConformidadById (
-      int id) async {
-        return await _noConformidadDatasource.getNoConformidadById(id);
-    
+  Future<List<NoConformidad>> getAllNoConformidad() async {
+    return await dataSource.getAllNoConformidad();
   }
-  
-  
+
   @override
-  Future<List<NoConformidadTableEntity>> getAllNoConformidad() async{
-    return await _noConformidadDatasource.getAllNoConformidad();
-    
+  Future<NoConformidad> getNoConformidadById(int id) async {
+    return await dataSource.getNoConformidadById(id);
   }
 }

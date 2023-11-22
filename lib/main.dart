@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_tesis/src/dependencies.dart';
-import 'package:gestion_tesis/src/presentation/global_search/cubit/global_search_cubit.dart';
-import 'package:gestion_tesis/src/presentation/global_search/global_search_page.dart';
 import 'package:gestion_tesis/src/presentation/pages/auth/auth_page.dart';
 import 'package:gestion_tesis/src/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:gestion_tesis/src/presentation/pages/help_page.dart';
-import 'package:gestion_tesis/src/presentation/pages/tesis/tesis_detail_page.dart';
+import 'package:gestion_tesis/src/presentation/pages/tesis_detail/tesis_detail_page.dart';
 import 'package:gestion_tesis/src/presentation/widgets/shared/home_bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
 
 import 'src/presentation/pages/pages.dart';
 
@@ -22,15 +21,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
+    return MultiProvider(
+      providers: [    
         BlocProvider(
           create: (context) =>
               injector.call<AuthBloc>()..add(OnCheckLoginEvent()),
-        ),
-        BlocProvider(
-          create: (context) => injector.call<GlobalSearchCubit>(),
-        ),
+        ),      
       ],
       child: App(),
     );
@@ -56,13 +52,12 @@ class App extends StatelessWidget {
             'navBar': (context) => const CustomBottomNavBar(),
             'home': (context) => const HomePage(),
             'tesis': (context) => const TesisPage(),
-            'tesis_detail': (context) => const TesisDetailPage(),
+            'tesis_detail': (context) => const TesisDetailPage(tesisId: 0),
             'tribunal': (context) => const TribunalPage(),
             'reporte': (context) => const ReportesPage(),
             'noConformidad': (context) => const NoConformidadPage(),
             'prueba': (context) => const PruebasPage(),
-            'search': (context) => const GlobalSearchPage(),
-            'help':(context) => const HelpPage(),
+            'help': (context) => const HelpPage(),
           },
         );
       },
