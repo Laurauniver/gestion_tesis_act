@@ -23,6 +23,39 @@ class GlobalSearchCubit extends Cubit<GlobalSearchState> {
   TextEditingController get searchController => _searchController;
   TextEditingController get typeAheadController => _typeAheadController;
 
+//   void getTesis(String query, titulo) {
+//   final searchResponse = allTesis.where((tesis) {
+//     if (tesis.texto == null) return false;
+//     final texto = cleanPlainText(tesis.texto);
+//     return texto.contains(cleanPlainText(query)) ||
+//         tesis.autor == query ||
+//         tesis.titulo == query ||
+//         tesis.area == query ||
+//         // Agrega otros criterios de búsqueda según tus necesidades
+//         // Ejemplo: tesis.estado == query, tesis.tutor == query, etc.
+//         false;
+//   }).toList();
+
+//   if (searchResponse.isEmpty) {
+//     emit(
+//       state.copyWith(
+//         searchParagraph: BaseListState<TesisTableEntity>.fail(
+//           const NoDataFailure('Sin resultados...'),
+//         ),
+//       ),
+//     );
+//   } else {
+//     emit(
+//       state.copyWith(
+//         searchParagraph: BaseListState<TesisTableEntity>.loaded(
+//           searchResponse.toList(),
+//         ),
+//       ),
+//     );
+//   }
+// }
+// }
+
   void initGlobalSearch() {
     emit(
       state.copyWith(

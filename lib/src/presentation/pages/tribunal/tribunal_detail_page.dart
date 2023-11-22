@@ -9,7 +9,7 @@ class TribunalDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Numero : ${tribunalTableEntity!.numero}')),
+      appBar: AppBar(title: Text('Tribunal ${tribunalTableEntity!.numero}')),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

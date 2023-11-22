@@ -45,6 +45,7 @@ class  _PruebasPage extends StatelessWidget {
                 return ListTile(
                   title: Text(
                       state.tests[index].tipo.toString()),
+                      //subtitle: Text(state.tests[index].estado.toString()),
                         trailing: IconButton(
                           icon: const Icon(Icons.visibility),
                           onPressed: () {

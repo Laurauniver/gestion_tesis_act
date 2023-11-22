@@ -7,6 +7,8 @@ class TutorMapper {
       id: tutorEntity.id,
       nombre: tutorEntity.nombre,
       apellidos: tutorEntity.apellidos,
+     // categoria: tutorEntity.categoria,
+      //cantidadTesis: tutorEntity.cantidadTesis
     );
   }
 }

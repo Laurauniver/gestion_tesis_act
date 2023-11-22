@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestion_tesis/src/presentation/pages/auth/bloc/auth_bloc.dart';
+import 'package:gestion_tesis/src/presentation/pages/help_page.dart';
 import 'package:gestion_tesis/src/presentation/pages/pages.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
@@ -18,7 +19,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('GraduApp'),
+        title: const Text('Gestión de Trabajos de Diploma'),
         actions: [
           IconButton(
             onPressed: () {
@@ -40,6 +41,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         children: const [
           HomePage(),
           ReportesPage(),
+          HelpPage(),
         ],
         onPageChanged: (index) {
           setState(() {
@@ -56,6 +58,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
             label: 'Reportes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            label: 'Acerca de',
           ),
         ],
         currentIndex: _selectedIndex,

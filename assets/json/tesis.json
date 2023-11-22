@@ -1,0 +1,80 @@
+{
+    "Tesis": [
+      {
+        "id": 1,
+        "autor": "Laura Elena Rodríguez Hernández ",
+        "titulo": "Aplicación móvil para la Gestión de Trabajos de Diploma para el Centro de Informatización Gobierno-Empresa",
+        "area": "Centro de Informatización Gobierno-Empresa",
+        "ano": 2023,
+        "tribunalId": 2
+      },
+      {
+        "id": 2,
+        "autores": [
+            {
+              "autor": "Chavely  Alfonso García"
+            },
+            {
+              "autor": "Dayana García Morejón"
+            }
+        ],    
+        "titulo": "Sistema de gestión de trabajos de diploma para el Centro de Informatización Gobierno-Empresa",
+        "area": "Centro de Informatización Gobierno-Empresa",
+        "ano": 2023,
+        "tribunalId": 2
+      },
+      {
+        "id": 3,
+        "autores": [
+            {
+              "autor": "Melissa Cribeiro Peraza"
+            },
+            {
+              "autor": "Braulio Michel Torres DÍaz"
+            }
+        ],    
+        "titulo": "Módulo para la gestión de la seguridad en el Sistema para gestión de préstamos",
+        "area": "Centro de Informatización Gobierno-Empresa",
+        "ano": 2023,
+        "tribunalId": 2
+      },
+      {
+        "id": 4,
+        "autores": [
+            {
+              "autor": " Gabriel David Milanés Torres"
+            },
+            {
+              "autor": "Alexander Santa Cruz Pacheco Ortega"
+            }
+        ],    
+        "titulo": "Sistema para la gestión de los proyectos de desarrollo de software en el Centro de Informatización Gobierno-Empresa",
+        "area": "Centro de Informatización Gobierno-Empresa",
+        "ano": 2023,
+        "tribunalId": 2
+      },
+      {
+        "id": 5,
+        "autores": [
+            {
+              "autor": "Adrian Aguirre Rodriguez"
+            },
+            {
+              "autor": "Yisel Hernández Gómez"
+            }
+        ],    
+        "titulo": "Módulo para la gestión de la seguridad en el Sistema para la Gestión de Cuadros",
+        "area": "Centro de Informatización Gobierno-Empresa",
+        "ano": 2023,
+        "tribunalId": 2
+      },
+      {
+        "id": 6,
+        "autor": "Jordan Téllez Pérez",
+        "titulo": "Diseño de una estrategia de pruebas seguridad para aplicaciones web en en el Centro de Informatización Gobierno-Empresa",
+        "area": "Centro de Informatización Gobierno-Empresa",
+        "ano": 2023,
+        "tribunalId": 2
+      }
+    ]
+  }

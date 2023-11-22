@@ -5,6 +5,7 @@ class TesisModel {
   final int ano;
   final String titulo;
   final String area;
+  //final int tribunalId;
 
   TesisModel({
     required this.tutorId,
@@ -13,6 +14,7 @@ class TesisModel {
     required this.ano,
     required this.titulo,
     required this.area, 
+    //required this.tribunalId
 
   });
 }

@@ -5,7 +5,7 @@ import 'package:gestion_tesis/src/data/datasources/local_data_sources/report_dat
 import 'package:gestion_tesis/src/presentation/pages/reports/cubit/report_cubit.dart';
 
 class ReportesPage extends StatelessWidget {
-  const ReportesPage({super.key});
+  const ReportesPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ReportesPage extends StatelessWidget {
 
 class Body extends StatelessWidget {
   const Body({
-    super.key,
+    Key? key,
   });
 
   @override
@@ -42,9 +42,24 @@ class Body extends StatelessWidget {
             return ListView.builder(
               itemCount: state.tutorsWithTesis.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(
-                      state.tutorsWithTesis[index].tutor.nombre.toString()),
+                return Table(
+                  border: TableBorder.all(),
+                  children: [
+                    TableRow(
+                      children: [
+                        TableCell(
+                          child: Text(
+                            state.tutorsWithTesis[index].tutor.nombre.toString(),
+                          ),
+                        ),
+                        // TableCell(
+                        //   child: Text(
+                        //     state.tutorsWithTesis[index].tutor.cantidadTesis.toString(),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  ],
                 );
               },
             );
@@ -57,7 +72,8 @@ class Body extends StatelessWidget {
   }
 }
 
-
+//este es de romario
+//este es mio
 // class ReportesPage extends StatefulWidget {
 
 

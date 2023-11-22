@@ -1,0 +1,33 @@
+{"Test":[
+    {
+      "id": 1,
+      "estado": "ejecutado",
+      "tipo": "Prueba de funcionalidad",
+      "descripcion": "Esta es una prueba para validar la funcionalidad",
+      "noConformidades": [
+        {
+          "id": 1,
+          "estado": "nueva",
+          "descripcion": "La funcionalidad de buscar por tipo de prueba no funciona."
+        },
+        {
+          "id": 2,
+          "estado": "resuelta",
+          "descripcion": "El botón de reporte, mostraba la misma pantalla 2 veces."
+        },
+        {
+          "id": 4,
+          "estado": "cerrada",
+          "descripcion": "Errores de idioma"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "estado": "sin ejecutar",
+      "tipo": "Prueba de rendimiento",
+      "descripcion": "Esta es una prueba para medir el rendimiento del sistema",
+      "noConformidades": []
+    }
+  ]
+}

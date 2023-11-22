@@ -1,0 +1,56 @@
+{ "Tribunal": [
+    {
+      "id": 1,
+      "cantidadMiembros": 6,
+      "presidente": "",
+      "secretario": "",
+      "vocales": [
+        {
+            "vocal": ""
+        },
+        {
+            "vocal": ""
+        },
+        {
+            "vocal": ""
+        }
+
+      ],
+      "tesisIds": []
+    },
+    {
+        "id": 2,
+        "cantidadMiembros": 5,
+        "presidente": "P. Aux. Ing. Mayleidis Lopez Fernandez",
+        "secretarios": [
+            {
+                "secretario": "P. As. MSc. Olga Yarisbel Rojas Grass"
+            },
+            {
+                "secretario": "P. As. MSc. Yordanis Garcia Leiva "
+            }        
+    
+          ],
+        "vocales": [
+            {
+                "vocal": "P. As.  Ing. Reinier Fernández Coello"
+            },
+            {
+                "vocal": "P. Aux. Lic. Dariela Elvira Espinosa Leyva"
+            }
+    
+          ],
+        "oponentes": [
+            {
+                "oponente": "Ing. Aldis Joan Abreu Medina"
+            },
+            {
+                "oponente": "Ing. Dariel Rodríguez Díaz"
+            }
+    
+        ],
+        "tesisIds": [1,2,3,4,5,6]
+      }
+  ]
+
+}
