@@ -1,5 +1,7 @@
 abstract class AuthRepository {
-  Future<bool> authentication(String user, String password);
+  bool authentication(String user, String password);
 
   Future checkLogin();
+
+  Future<void> logout();
 }

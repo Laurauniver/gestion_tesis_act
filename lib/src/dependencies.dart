@@ -1,11 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/no_conf_datasource.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/tests_datasource.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/tribunal_datasources.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/tutor_datasource.dart';
 import 'package:gestion_tesis/src/data/remote_data_source/no_conf_remote_data_source.dart';
 import 'package:gestion_tesis/src/data/remote_data_source/tesis_remote_data_sources.dart';
 import 'package:gestion_tesis/src/data/remote_data_source/tests_remote_data_sources.dart';
@@ -16,7 +11,8 @@ import 'package:gestion_tesis/src/data/repositories/tesis_repositrory_impl.dart'
 import 'package:gestion_tesis/src/data/repositories/test_repository_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/tribual_repository_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/tutor_repository_impl.dart';
-import 'package:gestion_tesis/src/domain/repositories/auth_repository_imp.dart';
+import 'package:gestion_tesis/src/data/repositories/auth_repository_imp.dart';
+import 'package:gestion_tesis/src/domain/repositories/auth_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/no_conf_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tesis_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tests_repository.dart';
@@ -37,23 +33,8 @@ Future<void> initializeDependencies() async {
   final SharedPreferences preferences = await SharedPreferences.getInstance();
   injector.registerLazySingleton(() => preferences);
 
-  //Database
-  injector.registerLazySingleton<AppDatabase>(() => AppDatabase());
-
   //Data sources
   injector
-    ..registerFactory(
-      () => TribunalDataSource(injector()),
-    )
-    ..registerFactory(
-      () => TutorDataSource(injector()),
-    )
-    ..registerFactory(
-      () => TestsDataSource(injector()),
-    )
-    ..registerFactory(
-      () => NoConformidadDataSource(injector()),
-    )
     ..registerFactory(
       () => TesisRemoteDataSource(),
     )
@@ -72,8 +53,8 @@ Future<void> initializeDependencies() async {
 
   //Repositories
   injector
-    ..registerLazySingleton(
-      () => AuthRepository(injector()),
+    ..registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(injector()),
     )
     ..registerLazySingleton<TesisRepository>(
       () => TesisRepositoryImpl(injector()),
@@ -92,10 +73,9 @@ Future<void> initializeDependencies() async {
     );
 
   // Blocs
-  injector
-    .registerFactory(
-      () => AuthBloc(injector()),
-    );
+  injector.registerFactory(
+    () => AuthBloc(injector()),
+  );
 }
 
 Future<void> registerStorageDirectory() async {

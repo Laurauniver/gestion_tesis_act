@@ -130,7 +130,6 @@ flutter:
   #     fonts:
   #       - asset: assets/fonts/ScriptoramaMarkdownJF.ttf
   assets:
-    - assets/json/
     - assets/img/
 
 flutter_intl:

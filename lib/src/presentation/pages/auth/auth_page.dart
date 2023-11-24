@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestion_tesis/common/app_colors.dart';
-import 'package:gestion_tesis/core/validators/form_validator.dart';
+import 'package:gestion_tesis/src/core/contants/app_colors.dart';
+import 'package:gestion_tesis/src/core/validators/form_validator.dart';
 import 'package:gestion_tesis/src/presentation/pages/auth/bloc/auth_bloc.dart';
 
 class AuthPage extends StatefulWidget {

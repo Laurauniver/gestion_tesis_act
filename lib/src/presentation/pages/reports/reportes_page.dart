@@ -11,8 +11,7 @@ class ReportesPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => ReportCubit(
         tutorRepository: injector(),
-        )
-      ..getAllTutor(),
+      )..getAllTutor(),
       child: const Scaffold(
         body: Body(),
       ),
@@ -35,32 +34,77 @@ class Body extends StatelessWidget {
           if (state.tutors.isEmpty) {
             return const Center(child: Text('No hay tutores con tesis'));
           } else {
-            return ListView.builder(
-              itemCount: state.tutors.length,
-              itemBuilder: (BuildContext context, int index) {
-                return DataTable(
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Text('Tutores'),
-                    ),
-                    DataColumn(
-                      label: Text('Cantidad de tesis'),
-                    ),
-                  ],
-                  rows: [
-                    DataRow(
-                      cells: [
-                        DataCell(
-                          Text('${state.tutors[index].nombre} ${state.tutors[index].apellidos}'),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IntrinsicWidth(
+                child: Table(
+                  border: TableBorder.all(width: 1.0),
+                  defaultVerticalAlignment: TableCellVerticalAlignment.top,
+                  columnWidths: {
+                    0: MaxColumnWidth(
+                        FixedColumnWidth(
+                            MediaQuery.of(context).size.width * 0.6),
+                        const FlexColumnWidth(0.4)),
+                    1: const MaxColumnWidth(
+                        IntrinsicColumnWidth(), FlexColumnWidth(0.4)),
+                  },
+                  children: [
+                    const TableRow(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
+                          child: Text(
+                            'Tutores',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        DataCell(
-                          Text(state.tutors[index].cantidadTesis.toString()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
+                          child: Text(
+                            'Cantidad de tesis',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ],
                     ),
+                    for (final tutor in state.tutors)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 12.0),
+                            child: Text(
+                              '${tutor.nombre} ${tutor.apellidos}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 12.0),
+                            child: Text(
+                              tutor.cantidadTesis.toString(),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
-                );
-              },
+                ),
+              ),
             );
           }
         } else {

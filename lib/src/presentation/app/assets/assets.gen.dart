@@ -19,21 +19,10 @@ class $AssetsImgGen {
   List<AssetGenImage> get values => [icon];
 }
 
-class $AssetsJsonGen {
-  const $AssetsJsonGen();
-
-  /// File path: assets/json/data.json
-  String get data => 'assets/json/data.json';
-
-  /// List of all assets
-  List<String> get values => [data];
-}
-
 class Assets {
   Assets._();
 
   static const $AssetsImgGen img = $AssetsImgGen();
-  static const $AssetsJsonGen json = $AssetsJsonGen();
 }
 
 class AssetGenImage {

@@ -1,9 +1,10 @@
+import 'package:gestion_tesis/src/domain/repositories/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthRepository {
+class AuthRepositoryImpl extends AuthRepository {
   final SharedPreferences preferences;
 
-  AuthRepository(this.preferences);
+  AuthRepositoryImpl(this.preferences);
 
   @override
   Future<bool> checkLogin() async {
@@ -19,7 +20,8 @@ class AuthRepository {
   Future<void> logout() async {
     await preferences.clear();
   }
-
+  
+  @override
   bool authentication(String user, String password) {
     const String defaultUser = "Admin";
     const String defaultPassword = "Admin";

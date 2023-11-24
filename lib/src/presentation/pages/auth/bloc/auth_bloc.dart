@@ -3,8 +3,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:gestion_tesis/src/domain/repositories/auth_repository_imp.dart';
-import 'package:meta/meta.dart';
+import 'package:gestion_tesis/src/domain/repositories/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
