@@ -33,16 +33,19 @@ class _TesisPageState extends State<_TesisPage> {
     return Scaffold(
       appBar: AppBar(
         title: showSearch
-            ? TextField(
-                controller: controller,
-                decoration: const InputDecoration(
-                  hintText: 'Búscar por titulo',
+            ? Theme(
+                data: ThemeData.dark(),
+                child: TextField(
+                  controller: controller,
+                  decoration: const InputDecoration(
+                    hintText: 'Búscar por titulo',
+                  ),
+                  onChanged: (value) {
+                    if (value.isNotEmpty) {
+                      context.read<TesisCubit>().getAllTesis(titulo: value);
+                    }
+                  },
                 ),
-                onChanged: (value) {
-                  if (value.isNotEmpty) {
-                    context.read<TesisCubit>().getAllTesis(titulo: value);
-                  }
-                },
               )
             : const Text('Listado de tesis'),
         actions: [
