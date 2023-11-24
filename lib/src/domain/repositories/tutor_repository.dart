@@ -1,11 +1,12 @@
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
+import 'package:gestion_tesis/src/data/models/tutor_model.dart';
 
 abstract class TutorRepository {
-  Future<List<TutorTableEntity>> getAllTutor();
+  Future<List<TutorModel>> getAllTutor();
 
-  Future<TutorTableEntity> getTutorById(int id);
+  Future<TutorModel> getTutorById(int id);
 
-  Future<List<TutorTableEntity>> getTutorByName(String name);
+//   Future<List<TutorModel>> getTutorByName(String name);
 
-  Future<List<TutorTableEntity>> getTutorByLastName(String lastName);
+//   Future<List<TutorModel>> getTutorByLastName(String lastName);
+// 
 }

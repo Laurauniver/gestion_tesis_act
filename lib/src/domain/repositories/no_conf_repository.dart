@@ -1,7 +1,7 @@
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
+import 'package:gestion_tesis/src/data/models/no_conformidad.dart';
 
 abstract class NoConformidadRepository {
-  Future<List<NoConformidadTableEntity>> getAllNoConformidad();
+  Future<List<NoConformidad>> getAllNoConformidad();
 
-  Future<NoConformidadTableEntity> getNoConformidadById(int id);
+  Future<NoConformidad> getNoConformidadById(int id);
 }

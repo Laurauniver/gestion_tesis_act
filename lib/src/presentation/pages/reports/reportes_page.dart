@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/report_datasources.dart';
+import 'package:gestion_tesis/src/dependencies.dart';
 import 'package:gestion_tesis/src/presentation/pages/reports/cubit/report_cubit.dart';
 
 class ReportesPage extends StatelessWidget {
-  const ReportesPage({super.key});
+  const ReportesPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ReportCubit(
-        ReportDataSources(
-          AppDatabase(),
-        ),
-      )..getAllTutorWithTesis(),
+        tutorRepository: injector(),
+      )..getAllTutor(),
       child: const Scaffold(
         body: Body(),
       ),
@@ -23,9 +20,7 @@ class ReportesPage extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
-  const Body({
-    super.key,
-  });
+  const Body({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +31,80 @@ class Body extends StatelessWidget {
         } else if (state is ReportFailure) {
           return Center(child: Text(state.message));
         } else if (state is ReportsSuccessful) {
-          if (state.tutorsWithTesis.isEmpty) {
+          if (state.tutors.isEmpty) {
             return const Center(child: Text('No hay tutores con tesis'));
           } else {
-            return ListView.builder(
-              itemCount: state.tutorsWithTesis.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(
-                      state.tutorsWithTesis[index].tutor.nombre.toString()),
-                );
-              },
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IntrinsicWidth(
+                child: Table(
+                  border: TableBorder.all(width: 1.0),
+                  defaultVerticalAlignment: TableCellVerticalAlignment.top,
+                  columnWidths: {
+                    0: MaxColumnWidth(
+                        FixedColumnWidth(
+                            MediaQuery.of(context).size.width * 0.6),
+                        const FlexColumnWidth(0.4)),
+                    1: const MaxColumnWidth(
+                        IntrinsicColumnWidth(), FlexColumnWidth(0.4)),
+                  },
+                  children: [
+                    const TableRow(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
+                          child: Text(
+                            'Tutores',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
+                          child: Text(
+                            'Cantidad de tesis',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    for (final tutor in state.tutors)
+                      TableRow(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 12.0),
+                            child: Text(
+                              '${tutor.nombre} ${tutor.apellidos}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 12.0),
+                            child: Text(
+                              tutor.cantidadTesis.toString(),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
             );
           }
         } else {
@@ -56,64 +114,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-
-// class ReportesPage extends StatefulWidget {
-
-
-
-//   @override
-//   _ReportePageState createState() => _ReportePageState();
-// }
-
-// class _ReportePageState extends State<ReportesPage> {
-//   List<TutorTableEntity> tutores = [];
-//   List<TesisTableEntity> tesis = [];
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     loadData();
-//   }
-
-//   Future<void> loadData() async {
-//     final tutores = await widget.tutorRepository.getAllTutor();
-//     final tesis = await widget.tesisRepository.getAllTesis();
-//     setState(() {
-//       this.tutores = tutores;
-//       this.tesis = tesis;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Reporte'),
-//       ),
-//       body: SingleChildScrollView(
-//         child: DataTable(
-//           columns: const [
-//             DataColumn(label: Text('Tutor')),
-//             DataColumn(label: Text('Tesis')),
-//             DataColumn(label: Text('Año')),
-//           ],
-//           rows: tutores.map((tutor) {
-//             List<TesisTableEntity> tesisTutor = tesis.where((t) => t.tutorId == tutor.id).toList();
-//             return DataRow(cells: [
-//               DataCell(Text('${tutor.nombre} ${tutor.apellidos}')),
-//               DataCell(Column(
-//                 children: tesisTutor.map((tesis) => Text(tesis.titulo)).toList(),
-//               )),
-//               DataCell(Column(
-//                 children: tesisTutor
-//                     .map((tesis) => Text(tesis.ano.toString()))
-//                     .toList(),
-//               )),
-//             ]);
-//           }).toList(),
-//         ),
-//       ),
-//     );
-//   }
-// }

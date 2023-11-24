@@ -12,7 +12,7 @@ final class TestsInitial extends TestsState {}
 final class TestsLoading extends TestsState{}
 
 final class TestsSuccessful extends TestsState{
-   final List<PruebaTableEntity> tests;
+   final List<Prueba> tests;
 
   TestsSuccessful({required this.tests});
 }

@@ -12,7 +12,7 @@ final class TribunalInitial extends TribunalState {}
 final class TribunalLoading extends TribunalState{}
 
 final class TribunalSuccessful extends TribunalState{
-  final List<TribunalTableEntity> tribunal;
+  final List<Tribunal> tribunal;
 
   TribunalSuccessful({required this.tribunal});
 

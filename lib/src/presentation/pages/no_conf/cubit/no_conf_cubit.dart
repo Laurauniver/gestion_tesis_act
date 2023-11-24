@@ -1,21 +1,24 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/no_conf_datasource.dart';
+import 'package:gestion_tesis/src/data/models/no_conformidad.dart';
+import 'package:gestion_tesis/src/domain/repositories/no_conf_repository.dart';
 
 part 'no_conf_state.dart';
 
 class NoConformidadCubit extends Cubit<NoConformidadState> {
-  NoConformidadCubit(this._noConformidadDataSource) : super(NoConformidadInitial());
-  final NoConformidadDataSource _noConformidadDataSource;
+  NoConformidadCubit({
+    required this.noConformidadRepository,
+  }) : super(NoConformidadInitial());
 
-  Future<void> getAllNoConformidad () async{
+  final NoConformidadRepository noConformidadRepository;
+
+  Future<void> getAllNoConformidad() async {
     emit(NoConformidadLoading());
     try {
-      final response = await _noConformidadDataSource.getAllNoConformidad();
+      final response = await noConformidadRepository.getAllNoConformidad();
       emit(NoConformidadSuccessful(noConformidad: response));
     } catch (e) {
       emit(NoConformidadFailure(message: e.toString()));
     }
   }
-  }
+}

@@ -1,7 +1,9 @@
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
+import 'package:gestion_tesis/src/data/models/tribunal.dart';
 
 abstract class TribunalRepository {
-  Future<List<TribunalTableEntity>> getAllTribunal();
+  Future<List<Tribunal>> getAllTribunal();
 
-  Future<TribunalTableEntity> getTribunalByPresident(String namePresident);
+  Future<Tribunal> getTribunalById(int id);
+
+ // Future<Tribunal> getTribunalByPresident(String namePresident);
 }

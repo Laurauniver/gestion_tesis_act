@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/no_conf_datasource.dart';
+import 'package:gestion_tesis/src/dependencies.dart';
 import 'package:gestion_tesis/src/presentation/pages/no_conf/cubit/no_conf_cubit.dart';
-
 
 class NoConformidadPage extends StatelessWidget {
   const NoConformidadPage({super.key});
@@ -12,47 +10,61 @@ class NoConformidadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NoConformidadCubit(
-              NoConformidadDataSource(
-          AppDatabase(),),)..getAllNoConformidad(),
-          child:  Scaffold(
-            appBar: AppBar(title: const Text('Listado de No Conformidades')),
-            body: const _NoConformidadPage(),));
-
-
+        noConformidadRepository: injector(),
+      )..getAllNoConformidad(),
+      child: const _NoConformidadPage(),
+    );
   }
 }
 
-class  _NoConformidadPage extends StatelessWidget {
-  const  _NoConformidadPage();
+class _NoConformidadPage extends StatelessWidget {
+  const _NoConformidadPage();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NoConformidadCubit, NoConformidadState>(
-      builder: (BuildContext context, NoConformidadState state) {
-        if (state is NoConformidadLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is NoConformidadFailure) {
-          return Center(child: Text(state.message));
-        } else if (state is NoConformidadSuccessful) {
-          if (state.noConformidad.isEmpty) {
-            return const Center(child: Text('No hay No Conformidades'));
-          } else {
-            return ListView.builder(
-              itemCount: state.noConformidad.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(
-                      state.noConformidad[index].descripcion.toString()),
-                );
-              },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Listado de no conformidades'),
+      ),
+      body: BlocBuilder<NoConformidadCubit, NoConformidadState>(
+        builder: (BuildContext context, NoConformidadState state) {
+          if (state is NoConformidadLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is NoConformidadFailure) {
+            return Center(
+              child: Text(state.message),
             );
+          } else if (state is NoConformidadSuccessful) {
+            if (state.noConformidad.isEmpty) {
+              return const Center(
+                child: Text('No hay no conformidades'),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  itemCount: state.noConformidad.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ListTile(
+                          title: Text('Estado: '+ (state.noConformidad[index].estado.toString())
+                              ),
+                          subtitle: Text(state.noConformidad[index].descripcion
+                              .toString()),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            }
+          } else {
+            return Container();
           }
-        } else {
-          return Container();
-        }
-
         },
-
+      ),
     );
   }
 }

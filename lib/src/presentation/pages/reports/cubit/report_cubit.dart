@@ -1,20 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/report_datasources.dart';
-import 'package:gestion_tesis/src/domain/entities/tutor_tesis_entity.dart';
+import 'package:gestion_tesis/src/data/models/tutor_model.dart';
+import 'package:gestion_tesis/src/domain/repositories/tutor_repository.dart';
 
 part 'report_state.dart';
 
 class ReportCubit extends Cubit<ReportState> {
-  ReportCubit(this._reportDataSources) : super(ReportInitial());
+  ReportCubit({required this.tutorRepository}) : super(ReportInitial());
 
-  final ReportDataSources _reportDataSources;
+  final TutorRepository tutorRepository;
 
-  Future<void> getAllTutorWithTesis() async {
+  Future<void> getAllTutor() async {
     emit(ReportLoading());
     try {
-      final response = await _reportDataSources.getAllTutorWithTesis();
-      emit(ReportsSuccessful(tutorsWithTesis: response));
+      final response = await tutorRepository.getAllTutor();
+      emit(ReportsSuccessful(tutors: response));
     } catch (e) {
       emit(ReportFailure(message: e.toString()));
     }
