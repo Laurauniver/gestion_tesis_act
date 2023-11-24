@@ -23,8 +23,8 @@ class AuthRepositoryImpl extends AuthRepository {
   
   @override
   bool authentication(String user, String password) {
-    const String defaultUser = "a";
-    const String defaultPassword = "a";
+    const String defaultUser = "admin";
+    const String defaultPassword = "admin";
 
     if (user == defaultUser && password == defaultPassword) {
       const token = '1234567890';
