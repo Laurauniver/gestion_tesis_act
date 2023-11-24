@@ -23,7 +23,7 @@ class TestsRemoteDataSource {
     // Decodifica el JSON
     Map<String, dynamic> data = json.decode(tests);
 
-    return (data['tests'] as List<Map<String, dynamic>>)
+    return (data['tests'] as List<dynamic>)
         .map((e) => Prueba.fromMap(e))
         .toList()
         .firstWhere((element) => element.id == id);
@@ -35,13 +35,13 @@ const tests = '''
     "tests": [
         {
             "id": 1,
-            "estado": "ejecutado",
+            "estado": "Ejecutado",
             "tipo": "Prueba de funcionalidad",
             "descripcion": "Esta es una prueba para validar la funcionalidad"
         },
         {
             "id": 2,
-            "estado": "sin ejecutar",
+            "estado": "Sin ejecutar",
             "tipo": "Prueba de rendimiento",
             "descripcion": "Esta es una prueba para medir el rendimiento del sistema"
         }

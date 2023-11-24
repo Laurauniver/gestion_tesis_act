@@ -60,8 +60,8 @@ class  _PruebasPage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: ((context) =>
-                                         PruebasDetailPage(
-                                        titulo: state.tests[index].tipo,
+                                         TestsDetailPage(
+                                        testsId: state.tests[index].id,
                                       ))));
                           }            
                         )
