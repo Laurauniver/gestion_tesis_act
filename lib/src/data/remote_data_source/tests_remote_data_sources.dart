@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:gestion_tesis/src/data/models/prueba.dart';
 
-
 class TestsRemoteDataSource {
   const TestsRemoteDataSource();
 
@@ -32,22 +31,20 @@ class TestsRemoteDataSource {
 }
 
 const tests = '''
-{"tests":
-  [
-    {
-      "id": 1,
-      "estado": "ejecutado",
-      "tipo": "Prueba de funcionalidad",
-      "descripcion": "Esta es una prueba para validar la funcionalidad",
-      
-    },
-    {
-      "id": 2,
-      "estado": "sin ejecutar",
-      "tipo": "Prueba de rendimiento",
-      "descripcion": "Esta es una prueba para medir el rendimiento del sistema",
-      
-    }
-  ]
+{
+    "tests": [
+        {
+            "id": 1,
+            "estado": "ejecutado",
+            "tipo": "Prueba de funcionalidad",
+            "descripcion": "Esta es una prueba para validar la funcionalidad"
+        },
+        {
+            "id": 2,
+            "estado": "sin ejecutar",
+            "tipo": "Prueba de rendimiento",
+            "descripcion": "Esta es una prueba para medir el rendimiento del sistema"
+        }
+    ]
 }
 ''';

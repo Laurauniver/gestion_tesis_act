@@ -48,7 +48,7 @@ class _TribunalPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                     'Tribunal: ' + (state.tribunal[index].numero?.toString() ?? ''),
+                                     'Tribunal: ${state.tribunal[index].numero}',
                                       style: const TextStyle(fontSize: 16),
                                 ),
                                 
