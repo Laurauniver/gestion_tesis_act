@@ -33,35 +33,31 @@ class _TesisDetailPage extends StatelessWidget {
           } else if (state is TesisDetailFailure) {
             return Center(child: Text(state.message));
           } else if (state is TesisDetailSuccessful) {
-            if (state.tesis == null) {
-              return const Center(child: Text('No hay tesis'));
-            } else {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _InfoWidget(
-                    label: 'Título',
-                    info: state.tesis.titulo,
-                  ),
-                  _InfoWidget(
-                    label: 'Autores',
-                    info: state.tesis.autores.join(', '),
-                  ),
-                  _InfoWidget(
-                    label: 'Área',
-                    info: state.tesis.area,
-                  ),
-                  _InfoWidget(
-                    label: 'Año',
-                    info: state.tesis.ano.toString(),
-                  ),
-                  _InfoWidget(
-                    label: 'Tribunal',
-                    info: state.tesis.tribunalId.toString(),
-                  )
-                ],
-              );
-            }
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _InfoWidget(
+                  label: 'Título',
+                  info: state.tesis.titulo,
+                ),
+                _InfoWidget(
+                  label: 'Autores',
+                  info: state.tesis.autores.join(', '),
+                ),
+                _InfoWidget(
+                  label: 'Área',
+                  info: state.tesis.area,
+                ),
+                _InfoWidget(
+                  label: 'Año',
+                  info: state.tesis.ano.toString(),
+                ),
+                _InfoWidget(
+                  label: 'Tribunal',
+                  info: state.tesis.tribunalId.toString(),
+                )
+              ],
+            );
           } else {
             return Container();
           }

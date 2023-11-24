@@ -127,19 +127,19 @@ class AuthForm extends StatelessWidget {
                     controller: _passwordController,
                     validator: validatedPasswordLogin,
                     cursorColor: AppColors.baseColor,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "***********",
                       prefixIcon: Material(
                         elevation: 0,
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
+                            BorderRadius.all(Radius.circular(10)),
                         child: Icon(
                           Icons.lock_outlined,
                           color: AppColors.baseColor,
                         ),
                       ),
                       border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
+                      contentPadding: EdgeInsets.symmetric(
                         horizontal: 25,
                         vertical: 13,
                       ),
@@ -154,12 +154,12 @@ class AuthForm extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 80),
                 child: BlocListener<AuthBloc, AuthState>(
                   listener: (context, state) {
-                    if (state is SuccessfulAuthState) {
+                    if (state is AuthStateLogged) {
                       Navigator.pushReplacementNamed(context, 'navBar');
-                    } else if (state is FailureAuthState) {
+                    } else if (state is AuthStateFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: Colors.red,
-                          content: Text(state.error)));
+                          content: Text(state.message)));
                     }
                   },
                   child: SizedBox(

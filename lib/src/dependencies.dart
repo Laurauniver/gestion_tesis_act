@@ -18,7 +18,6 @@ import 'package:gestion_tesis/src/domain/repositories/tesis_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tests_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tribunal_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tutor_repository.dart';
-import 'package:gestion_tesis/src/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,11 +70,6 @@ Future<void> initializeDependencies() async {
     ..registerLazySingleton<NoConformidadRepository>(
       () => NoConformidadRepositoryImpl(injector()),
     );
-
-  // Blocs
-  injector.registerFactory(
-    () => AuthBloc(injector()),
-  );
 }
 
 Future<void> registerStorageDirectory() async {

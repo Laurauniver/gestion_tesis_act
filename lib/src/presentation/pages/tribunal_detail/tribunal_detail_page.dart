@@ -33,35 +33,29 @@ class _TribunalDetailPage extends StatelessWidget {
           } else if (state is TribunalDetailFailure) {
             return Center(child: Text(state.message));
           } else if (state is TribunalDetailSuccessful) {
-            if (state.tribunal == null) {
-              return const Center(child: Text('No hay tribunales'));
-            } else {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _InfoWidget(
-                    label: 'Tribunal',
-                    info: state.tribunal.numero.toString(),
-                  ),
-                  _InfoWidget(
-                    label: 'Presidente',
-                    info: state.tribunal.presidente
-                  ),
-                  _InfoWidget(
-                    label: 'Secretarios',
-                    info: state.tribunal.secretario.join(', '),
-                  ),
-                  _InfoWidget(
-                    label: 'Vocales',
-                    info: state.tribunal.vocal.join(', '),
-                  ),
-                  _InfoWidget(
-                    label: 'Oponentes',
-                    info: state.tribunal.oponente.join(', '),
-                  )
-                ],
-              );
-            }
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _InfoWidget(
+                  label: 'Tribunal',
+                  info: state.tribunal.numero.toString(),
+                ),
+                _InfoWidget(
+                    label: 'Presidente', info: state.tribunal.presidente),
+                _InfoWidget(
+                  label: 'Secretarios',
+                  info: state.tribunal.secretario.join(', '),
+                ),
+                _InfoWidget(
+                  label: 'Vocales',
+                  info: state.tribunal.vocal.join(', '),
+                ),
+                _InfoWidget(
+                  label: 'Oponentes',
+                  info: state.tribunal.oponente.join(', '),
+                )
+              ],
+            );
           } else {
             return Container();
           }

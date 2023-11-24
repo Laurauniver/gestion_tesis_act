@@ -1,28 +1,44 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'auth_bloc.dart';
 
-// @immutable
-class AuthState {
-  final bool? isAuth;
+// // @immutable
+// class AuthState {
+//   final bool? isAuth;
 
-  const AuthState({
-    this.isAuth,
-  });
+//   const AuthState({
+//     this.isAuth,
+//   });
 
-  AuthState copyWith({
-    bool? isAuth,
-  }) =>
-      AuthState(
-        isAuth: isAuth ?? isAuth,
-      );
+//   AuthState copyWith({
+//     bool? isAuth,
+//   }) =>
+//       AuthState(
+//         isAuth: isAuth ?? isAuth,
+//       );
+// }
+
+// class LoadingAuthState extends AuthState {}
+
+// class SuccessfulAuthState extends AuthState {}
+
+// class FailureAuthState extends AuthState {
+//   final String error;
+
+//   const FailureAuthState(this.error);
+// }
+
+sealed class AuthState extends Equatable {
+  @override
+  List<Object> get props => [];
 }
 
-class LoadingAuthState extends AuthState {}
+final class AuthStateUnLogged extends AuthState {}
 
-class SuccessfulAuthState extends AuthState {}
+final class AuthStateLoading extends AuthState {}
 
-class FailureAuthState extends AuthState {
-  final String error;
+final class AuthStateLogged extends AuthState {}
 
-  const FailureAuthState(this.error);
+final class AuthStateFailure extends AuthState {
+  final String message;
+  AuthStateFailure({required this.message});
 }
