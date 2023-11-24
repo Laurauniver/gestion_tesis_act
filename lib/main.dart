@@ -54,6 +54,7 @@ class App extends StatelessWidget {
             'tesis': (context) => const TesisPage(),
             'tesis_detail': (context) => const TesisDetailPage(tesisId: 0),
             'tribunal': (context) => const TribunalPage(),
+            'tribunal_detail':(context) => const TribunalDetailPage(tribunalId: 0),
             'reporte': (context) => const ReportesPage(),
             'noConformidad': (context) => const NoConformidadPage(),
             'prueba': (context) => const PruebasPage(),

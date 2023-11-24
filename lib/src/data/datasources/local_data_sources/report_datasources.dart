@@ -1,5 +1,4 @@
 import 'package:gestion_tesis/src/data/datasources/db/database.dart';
-import 'package:gestion_tesis/src/data/mapper/tutor_mapper.dart';
 import 'package:gestion_tesis/src/data/mapper/tutor_tesis_mapper.dart';
 import 'package:gestion_tesis/src/data/models/tesis.dart';
 import 'package:gestion_tesis/src/domain/entities/tutor_tesis_entity.dart';

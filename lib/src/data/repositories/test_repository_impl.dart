@@ -1,26 +1,20 @@
-import 'package:gestion_tesis/src/data/datasources/db/database.dart';
-import 'package:gestion_tesis/src/data/datasources/local_data_sources/tests_datasource.dart';
+import 'package:gestion_tesis/src/data/models/prueba.dart';
 import 'package:gestion_tesis/src/domain/repositories/tests_repository.dart';
+import 'package:gestion_tesis/src/data/remote_data_source/tests_remote_data_sources.dart';
 
 class TestsRepositoryImpl extends TestsRepository {
   TestsRepositoryImpl(this._pruebaDatasource);
 
-  final TestsDataSource _pruebaDatasource;
+  final TestsRemoteDataSource _pruebaDatasource;
 
   @override
-  Future<List<PruebaTableEntity>> getAllPrueba() async {
-    return await _pruebaDatasource.getAllPrueba();
+  Future<List<Prueba>> getAllPrueba() async {
+        return await _pruebaDatasource.getAllPrueba();
   }
 
   @override
-  Future<PruebaTableEntity> getPruebaById(int id) async{
+  Future<Prueba> getPruebaById(int id) async{
     return await _pruebaDatasource.getPruebaById(id);
   }
 
-  @override
-  Future<List<PruebaTableEntity>> getPruebaByTipo (
-      String tipo) async {
-        return await _pruebaDatasource.getPruebaByTipo(tipo);
-
-  }
 }

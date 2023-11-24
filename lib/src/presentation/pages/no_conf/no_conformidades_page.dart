@@ -49,8 +49,8 @@ class _NoConformidadPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: ListTile(
-                          title: Text(
-                              state.noConformidad[index].estado.toString()),
+                          title: Text('Estado: '+ (state.noConformidad[index].estado.toString())
+                              ),
                           subtitle: Text(state.noConformidad[index].descripcion
                               .toString()),
                         ),

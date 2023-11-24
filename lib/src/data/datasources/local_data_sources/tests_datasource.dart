@@ -28,11 +28,9 @@ class TestsDataSource {
 
 
   @override
-  Future<List<PruebaTableEntity>> getPruebaByTipo(String tipo) async {
+  Future<List<PruebaTableEntity>> getPruebaByTipo({String? tipo}) async {
     return await (_appDatabase.select(pruebaEntity)
-          ..where((tbl) => tbl.tipo.equals(tipo))).get();
+          ..where((tbl) => tbl.tipo.equals(tipo!))).get();
   }
-
-
 }
 

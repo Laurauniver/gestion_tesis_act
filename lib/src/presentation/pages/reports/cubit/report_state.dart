@@ -10,9 +10,9 @@ final class ReportInitial extends ReportState {}
 final class ReportLoading extends ReportState {}
 
 final class ReportsSuccessful extends ReportState {
-  final List<TutorTesisEntity> tutorsWithTesis;
+  final List<TutorModel> tutors;
 
-  ReportsSuccessful({required this.tutorsWithTesis});
+  ReportsSuccessful({required this.tutors});
 }
 
 final class ReportFailure extends ReportState {

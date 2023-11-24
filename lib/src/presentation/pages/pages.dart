@@ -5,6 +5,6 @@ export 'reports/reportes_page.dart';
 export 'tesis/tesis_page.dart';
 export 'tests/prueba_detail_page.dart';
 export 'tests/pruebas_page.dart';
-export 'tribunal/tribunal_detail_page.dart';
+export 'tribunal_detail/tribunal_detail_page.dart';
 export 'tribunal/tribunal_page.dart';
 

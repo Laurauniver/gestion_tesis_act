@@ -8,6 +8,9 @@ import 'package:gestion_tesis/src/data/datasources/local_data_sources/tribunal_d
 import 'package:gestion_tesis/src/data/datasources/local_data_sources/tutor_datasource.dart';
 import 'package:gestion_tesis/src/data/remote_data_source/no_conf_remote_data_source.dart';
 import 'package:gestion_tesis/src/data/remote_data_source/tesis_remote_data_sources.dart';
+import 'package:gestion_tesis/src/data/remote_data_source/tests_remote_data_sources.dart';
+import 'package:gestion_tesis/src/data/remote_data_source/tribunal_remote_data_source.dart';
+import 'package:gestion_tesis/src/data/remote_data_source/tutor_remote_data_source.dart';
 import 'package:gestion_tesis/src/data/repositories/no_conf_repository_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/tesis_repositrory_impl.dart';
 import 'package:gestion_tesis/src/data/repositories/test_repository_impl.dart';
@@ -20,8 +23,6 @@ import 'package:gestion_tesis/src/domain/repositories/tests_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tribunal_repository.dart';
 import 'package:gestion_tesis/src/domain/repositories/tutor_repository.dart';
 import 'package:gestion_tesis/src/presentation/pages/auth/bloc/auth_bloc.dart';
-import 'package:gestion_tesis/src/presentation/pages/tests/cubit/tests_cubit.dart';
-import 'package:gestion_tesis/src/presentation/pages/tribunal/cubit/tribunal_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,6 +59,15 @@ Future<void> initializeDependencies() async {
     )
     ..registerLazySingleton(
       () => NoConformidadRemoteDataSource(),
+    )
+    ..registerFactory(
+      () => TestsRemoteDataSource(),
+    )
+    ..registerFactory(
+      () => TribunalRemoteDataSource(),
+    )
+    ..registerFactory(
+      () => TutorRemoteDataSource(),
     );
 
   //Repositories
@@ -83,13 +93,7 @@ Future<void> initializeDependencies() async {
 
   // Blocs
   injector
-    ..registerFactory(
-      () => TribunalCubit(injector()),
-    )
-    ..registerFactory(
-      () => TestsCubit(injector()),
-    )
-    ..registerFactory(
+    .registerFactory(
       () => AuthBloc(injector()),
     );
 }
