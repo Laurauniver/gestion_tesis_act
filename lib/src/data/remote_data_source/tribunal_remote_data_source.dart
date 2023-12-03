@@ -35,26 +35,21 @@ const tribunal = '''
 { "tribunal": [
     {
         "id": 1,
-        "numero": 2,
+        "numero": 3,
         "cantidadMiembros": 5,
         "presidente": "P. Aux. Ing. Mayleidis Lopez Fernandez",
-        "secretario": [
+        "miembros": [
                 "P. As. MSc. Olga Yarisbel Rojas Grass" ,
   
-                "P. As. MSc. Yordanis Garcia Leiva "
-                ],
-        "vocal": [
+                "P. As. MSc. Yordanis Garcia Leiva ",
             
                 "P. As.  Ing. Reinier Fernández Coello",
   
-                "P. Aux. Lic. Dariela Elvira Espinosa Leyva"
-          ],
-        "oponente": [
-           
+                "P. Aux. Lic. Dariela Elvira Espinosa Leyva",
+        
                "Ing. Aldis Joan Abreu Medina",
 
                "Ing. Dariel Rodríguez Díaz"
-
     
         ]
         

@@ -43,17 +43,22 @@ class _TribunalDetailPage extends StatelessWidget {
                 _InfoWidget(
                     label: 'Presidente', info: state.tribunal.presidente),
                 _InfoWidget(
-                  label: 'Secretarios',
-                  info: state.tribunal.secretario.join(', '),
+                    label: 'Miembros',
+                    info: state.tribunal.miembros.map((miembro) => '$miembro').join('\n'),
                 ),
-                _InfoWidget(
-                  label: 'Vocales',
-                  info: state.tribunal.vocal.join(', '),
-                ),
-                _InfoWidget(
-                  label: 'Oponentes',
-                  info: state.tribunal.oponente.join(', '),
-                )
+                   
+                // _InfoWidget(
+                //   label: 'Miembros',
+                //   info: state.tribunal.miembros.join(', '),
+                // ),
+                // _InfoWidget(
+                //   label: 'Vocales',
+                //   info: state.tribunal.vocal.join(', '),
+                // ),
+                // _InfoWidget(
+                //   label: 'Oponentes',
+                //   info: state.tribunal.oponente.join(', '),
+                // )
               ],
             );
           } else {

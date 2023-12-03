@@ -7,18 +7,18 @@ class Tribunal{
   final int numero;
   final int cantidadMiembros;
   final String presidente;
-  final List<String> secretario;
-  final List<String> vocal;
-  final List<String> oponente;
+  final List<String> miembros;
+  // final List<String> vocal;
+  // final List<String> oponente;
 
   Tribunal({
   required this.id,
   required this.numero,
   required this.cantidadMiembros,
   required this.presidente,
-  required this.secretario,
-  required this.vocal,
-  required this.oponente
+  required this.miembros,
+  // required this.vocal,
+  // required this.oponente
 });
 
 Tribunal copyWith({
@@ -26,18 +26,18 @@ Tribunal copyWith({
     int? numero,
     int? cantidadMiembros,
     String? presidente,
-    List<String>? secretario,
-    List<String>? vocal,
-    List<String>? oponente,
+    List<String>? miembros,
+    // List<String>? vocal,
+    // List<String>? oponente,
   }) {
     return Tribunal(
       id: id ?? this.id,
       numero: numero ?? this.numero,
       cantidadMiembros: cantidadMiembros ?? this.cantidadMiembros,
       presidente: presidente ?? this.presidente,
-      secretario: secretario ?? this.secretario,
-      vocal: vocal ?? this.vocal,
-      oponente: oponente ?? this.oponente,
+      miembros: miembros ?? this.miembros,
+      // vocal: vocal ?? this.vocal,
+      // oponente: oponente ?? this.oponente,
     );
   }
 
@@ -47,9 +47,9 @@ Tribunal copyWith({
       'numero': numero,
       'cantidadMiembros': cantidadMiembros,
       'presidente': presidente,
-      'secretario': secretario,
-      'vocal': vocal,
-      'oponente': oponente,
+      'miembros': miembros,
+      // 'vocal': vocal,
+      // 'oponente': oponente,
     };
   }
 
@@ -59,9 +59,9 @@ Tribunal copyWith({
       numero: map['numero'] as int,
       cantidadMiembros: map['cantidadMiembros'] as int,
       presidente: map['presidente'] as String,
-      secretario: List<String>.from((map['secretario'] as List<dynamic>)),
-      vocal: List<String>.from((map['vocal'] as List<dynamic>)),
-      oponente: List<String>.from((map['oponente'] as List<dynamic>)),
+      miembros: List<String>.from((map['miembros'] as List<dynamic>)),
+      // vocal: List<String>.from((map['vocal'] as List<dynamic>)),
+      // oponente: List<String>.from((map['oponente'] as List<dynamic>)),
     );
   }
 
@@ -70,7 +70,8 @@ Tribunal copyWith({
   factory Tribunal.fromJson(String source) => Tribunal.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Tribunal(id: $id, numero: $numero, cantidadMiembros: $cantidadMiembros, presidente: $presidente, secretario: $secretario, vocal: $vocal, oponente: $oponente)';
+  String toString() => 'Tribunal(id: $id, numero: $numero, cantidadMiembros: $cantidadMiembros, presidente: $presidente, miembros: $miembros)';
+  //, vocal: $vocal, oponente: $oponente)';
 
   @override
   bool operator ==(covariant Tribunal other) {
@@ -81,13 +82,14 @@ Tribunal copyWith({
       other.numero == numero &&
       other.cantidadMiembros == cantidadMiembros &&
       other.presidente == presidente &&
-      listEquals(other.secretario, secretario) &&
-      listEquals(other.vocal, vocal) &&
-      listEquals(other.oponente, oponente);
+      listEquals(other.miembros, miembros);
+      // listEquals(other.vocal, vocal) &&
+      // listEquals(other.oponente, oponente);
    
   }
 
   @override
-  int get hashCode => id.hashCode ^ numero.hashCode ^ cantidadMiembros.hashCode ^ presidente.hashCode ^ secretario.hashCode ^ vocal.hashCode ^ oponente.hashCode;
+  int get hashCode => id.hashCode ^ numero.hashCode ^ cantidadMiembros.hashCode ^ presidente.hashCode ^ miembros.hashCode;
+  //^ vocal.hashCode ^ oponente.hashCode;
 }
 
