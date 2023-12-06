@@ -53,7 +53,7 @@ const tesis = '''
       "autores": [
         "Laura Elena Rodríguez Hernández"
       ],
-      "tribunalId": 2
+      "tribunalId": 3
     },
     {
       "id": 2,
@@ -64,7 +64,7 @@ const tesis = '''
       "titulo": "Sistema de gestión de trabajos de diploma para el Centro de Informatización Gobierno-Empresa",
       "area": "Centro de Informatización Gobierno-Empresa",
       "ano": 2023,
-      "tribunalId": 2
+      "tribunalId": 3
     },
     {
       "id": 3,
@@ -75,7 +75,7 @@ const tesis = '''
       "titulo": "Módulo para la gestión de la seguridad en el Sistema para gestión de préstamos",
       "area": "Centro de Informatización Gobierno-Empresa",
       "ano": 2023,
-      "tribunalId": 2
+      "tribunalId": 3
     },
     {
       "id": 4,
@@ -86,7 +86,7 @@ const tesis = '''
       "titulo": "Sistema para la gestión de los proyectos de desarrollo de software en el Centro de Informatización Gobierno-Empresa",
       "area": "Centro de Informatización Gobierno-Empresa",
       "ano": 2023,
-      "tribunalId": 2
+      "tribunalId": 3
     },
     {
       "id": 5,
@@ -97,7 +97,7 @@ const tesis = '''
       "titulo": "Módulo para la gestión de la seguridad en el Sistema para la Gestión de Cuadros",
       "area": "Centro de Informatización Gobierno-Empresa",
       "ano": 2023,
-      "tribunalId": 2
+      "tribunalId": 3
     },
     {
       "id": 6,
@@ -107,7 +107,7 @@ const tesis = '''
       "titulo": "Diseño de una estrategia de pruebas seguridad para aplicaciones web en en el Centro de Informatización Gobierno-Empresa",
       "area": "Centro de Informatización Gobierno-Empresa",
       "ano": 2023,
-      "tribunalId": 2
+      "tribunalId": 3
     }
   ]
 }
